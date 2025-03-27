@@ -68,20 +68,16 @@ def stop_all_threads(uid):
     return [True, f"Stopped {stopped_count} threads"]
 
 def monitor_on_change(app: IntegratorManager, uid, kargs):
-    """
-    Monitor PLC signals using S7comm protocol and report when values change
-    """
     machine_config = app.get_machine_config(uid=uid)
 
     def __monitor_on_change(stop_event, refresh_event, uid, kargs, machine_config):
         app.log_statement(f"Monitoring On Change")
         try:
             host = machine_config["host"]
-            rack = int(machine_config.get("rack", 0))  # Default rack=0
-            slot = int(machine_config.get("slot", 1))  # Default slot=1
+            rack = int(machine_config.get("rack", 0))  
+            slot = int(machine_config.get("slot", 1))  
             signals_config = json.loads(machine_config["signals_configuration"])
             
-            # Create PLC instance instead of ModbusConnection
             plc = PLC(host, rack, slot)
             
             monitor_config = signals_config.get("monitor_signals", {})
@@ -96,14 +92,12 @@ def monitor_on_change(app: IntegratorManager, uid, kargs):
                 try:
                     if refresh_event.is_set():
                         logger.info("Refreshing Connection")
-                        # Create a new PLC instance on refresh
                         plc = PLC(host, rack, slot)
                         refresh_event.clear()
                         
                     response = {}
                     for signal, config in monitor_on_change_signals.items():
                         signal_config = signals_config.get(signal)
-                        # Use our S7comm read_helper
                         result = read_helper(signal_config, plc)
                         prev_value = prev_values.get(signal)
                         
@@ -120,10 +114,9 @@ def monitor_on_change(app: IntegratorManager, uid, kargs):
                                     value = result
                                     
                                 ack_signal_config = signals_config.get(ack_signal)
-                                # Use our S7comm write_helper
                                 write_helper(ack_signal_config, plc, value)
                                 
-                    if response:  # Only send event if there are changes
+                    if response:
                         app.send_event(event_name="monitor_on_change_response", 
                                       response=json.dumps(response), 
                                       machine_id=uid)
@@ -171,9 +164,6 @@ def monitor_on_change(app: IntegratorManager, uid, kargs):
     return [True, f"Monitoring thread started for {uid}"]
 
 def monitor_continuously(app: IntegratorManager, uid, kargs):
-    """
-    Monitor PLC signals using S7comm protocol continuously at regular intervals
-    """
     machine_config = app.get_machine_config(uid=uid)
     print("monitor_continuously_running==================================")
     
@@ -181,11 +171,10 @@ def monitor_continuously(app: IntegratorManager, uid, kargs):
         app.log_statement(f"Monitoring Continuously")
         try:
             host = machine_config["host"]
-            rack = int(machine_config.get("rack", 0))  # Default rack=0
-            slot = int(machine_config.get("slot", 1))  # Default slot=1
+            rack = int(machine_config.get("rack", 0))
+            slot = int(machine_config.get("slot", 1)) 
             signals_config = json.loads(machine_config["signals_configuration"])
             
-            # Create PLC instance instead of ModbusConnection
             plc = PLC(host, rack, slot)
             
             monitor_config = signals_config.get("monitor_signals", {})
@@ -199,14 +188,12 @@ def monitor_continuously(app: IntegratorManager, uid, kargs):
                 try:
                     if refresh_event.is_set():
                         logger.info("Refreshing Connection")
-                        # Create a new PLC instance on refresh
                         plc = PLC(host, rack, slot)
                         refresh_event.clear()
                         
                     response = {}
                     for signal, config in monitor_continuous_signals.items():
                         signal_config = signals_config.get(signal)
-                        # Use our S7comm read_helper
                         result = read_helper(signal_config, plc)
                         response[signal] = result
                         
@@ -219,7 +206,6 @@ def monitor_continuously(app: IntegratorManager, uid, kargs):
                                 value = result
                                 
                             ack_signal_config = signals_config.get(ack_signal)
-                            # Use our S7comm write_helper
                             write_helper(ack_signal_config, plc, value)
                             
                     print("sending event----------", response)

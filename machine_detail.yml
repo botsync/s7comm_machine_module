@@ -4,19 +4,19 @@ monitor_functions:
     function_name: "monitor_on_change"
     event_response: "monitor_on_change_response"
     kwargs: {}
-  monitor_continously:
-    display_name: "Monitor Signals Continously"
-    function_name: "monitor_continously"
-    event_response: "monitor_continously_response"
+  monitor_continuously:
+    display_name: "Monitor Signals Continuously"
+    function_name: "monitor_continuously"
+    event_response: "monitor_continuously_response"
     kwargs: {}
 monitor_events:
   monitor_on_change_response:
     display_name: "Monitor Signals On Change Response"
     event_name: "monitor_on_change_response"
     rargs: {}
-  monitor_continously_response:
-    display_name: "Monitor Signals Continously Response"
-    event_name: "monitor_continously_response"
+  monitor_continuously_response:
+    display_name: "Monitor Signals Continuously Response"
+    event_name: "monitor_continuously_response"
     rargs: {}
 call_functions:
   send_signal:

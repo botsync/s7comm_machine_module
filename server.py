@@ -142,12 +142,9 @@ class S7commServer():
             
     def start_server(self):
         self.server.serve_forever()
-
-if __name__ == "__main__":
-
-    for key,fun in CALL_FUNCTIONS_MAP.items():
-        app.register_call_function(key,fun)
-    for key,fun in MONITOR_FUNCTIONS_MAP.items():
-        app.register_monitor_function(key,fun)
-    
+if __name__ == '__main__':
+    for i in CALL_FUNCTIONS_MAP:
+        app.register_call_function(i, CALL_FUNCTIONS_MAP[i])
+    for i in MONITOR_FUNCTIONS_MAP:
+        app.register_monitor_function(i, MONITOR_FUNCTIONS_MAP[i])
     app.start()

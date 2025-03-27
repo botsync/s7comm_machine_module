@@ -1,0 +1,7 @@
+psutil
+pyyaml
+python-dotenv
+redis
+rel
+dotenv
+python-snap7==1.3

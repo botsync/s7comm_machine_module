@@ -1,0 +1,72 @@
+{
+    "machine_id": "S7PLC_001",
+    "host": "192.168.1.10",
+    "rack": 0,
+    "slot": 1,
+    "signals_configuration": {
+      "motor_run": {
+        "type": "bool",
+        "db_number": 1,
+        "offset": 0,
+        "bit_pos": 0,
+        "description": "Motor run status"
+      },
+      "motor_speed": {
+        "type": "int",
+        "db_number": 1,
+        "offset": 2,
+        "description": "Motor speed (RPM)"
+      },
+      "motor_temperature": {
+        "type": "real",
+        "db_number": 1,
+        "offset": 4,
+        "description": "Motor temperature (°C)"
+      },
+      "error_code": {
+        "type": "dint",
+        "db_number": 1,
+        "offset": 8,
+        "description": "Error code"
+      },
+      "status_message": {
+        "type": "string",
+        "db_number": 1,
+        "offset": 12,
+        "max_length": 50,
+        "description": "Status message"
+      },
+      "fault_bit_1": {
+        "type": "bool",
+        "db_number": 2,
+        "offset": 0,
+        "bit_pos": 0,
+        "description": "Fault bit 1 - Overtemperature"
+      },
+      "fault_bit_2": {
+        "type": "bool",
+        "db_number": 2,
+        "offset": 0,
+        "bit_pos": 1,
+        "description": "Fault bit 2 - Overcurrent"
+      },
+      "setpoint": {
+        "type": "real",
+        "db_number": 3,
+        "offset": 0,
+        "description": "Process setpoint"
+      },
+      "process_value": {
+        "type": "real",
+        "db_number": 3,
+        "offset": 4,
+        "description": "Process actual value"
+      },
+      "part_counter": {
+        "type": "dint",
+        "db_number": 4,
+        "offset": 0,
+        "description": "Part counter"
+      }
+    }
+  }

@@ -1,0 +1,110 @@
+monitor_functions:
+  monitor_on_change:
+    display_name: "Monitor Signals On Change"
+    function_name: "monitor_on_change"
+    event_response: "monitor_on_change_response"
+    kwargs: {}
+  monitor_continously:
+    display_name: "Monitor Signals Continously"
+    function_name: "monitor_continously"
+    event_response: "monitor_continously_response"
+    kwargs: {}
+monitor_events:
+  monitor_on_change_response:
+    display_name: "Monitor Signals On Change Response"
+    event_name: "monitor_on_change_response"
+    rargs: {}
+  monitor_continously_response:
+    display_name: "Monitor Signals Continously Response"
+    event_name: "monitor_continously_response"
+    rargs: {}
+call_functions:
+  send_signal:
+    display_name: "Send Signal"
+    function_name: "send_signal"
+    event_response: "send_signal_response"
+    kwargs:
+      signal:
+        input_field: "signal"
+        display_name: "Signal Name"
+      value:
+        input_field: "value"
+        display_name: "Value"
+  read_signal:
+    display_name: "Read Signal"
+    function_name: "read_signal"
+    event_response: "read_signal_response"
+    kwargs:
+      signal:
+        input_field: "signal"
+        display_name: "Signal Name"
+      value:
+        input_field: "value"
+        display_name: "Value"
+  send_multiple_signals:
+    display_name: "Send Multiple Signals"
+    function_name: "send_multiple_signals"
+    event_response: "send_multiple_signals_response"
+    kwargs:
+      signals:
+        input_field: "signals"
+        display_name: "Signal Names"
+      values:
+        input_field: "values"
+        display_name: "Values"
+  read_multiple_signals:
+    display_name: "Read Multiple Signals"
+    function_name: "read_multiple_signals"
+    event_response: "read_multiple_signals_response"
+    kwargs:
+      signals:
+        input_field: "signals"
+        display_name: "Signal Names"
+      
+call_events:
+  send_signal_response:
+    display_name: "Send Signal Response"
+    event_name: "send_signal_response"
+    rargs:
+      signal:
+        input_field: "signal"
+        display_name: "Signal"
+      success:
+        input_field: "success"
+        display_name: "Success"
+  read_signal_response:
+    display_name: "Read Signal Response"
+    event_name: "read_signal_response"
+    rargs:
+      signal:
+        input_field: "signal"
+        display_name: "Signal"
+      value:
+        input_field: "value"
+        display_name: "Value"
+  send_multiple_signals_response:
+    display_name: "Send Multiple Signals Response"
+    event_name: "send_multiple_signals_response"
+    rargs:
+      success:
+        input_field: "success"
+        display_name: "Success"
+        options:
+          - True
+          - False
+      results:
+        input_field: "results"
+        display_name: "Results"
+  read_multiple_signals_response:
+    display_name: "Read Multiple Signals Response"
+    event_name: "read_multiple_signals_response"
+    rargs:
+      success:
+        input_field: "success"
+        display_name: "Success"
+        options:
+          - True
+          - False
+      results:
+        input_field: "results"
+        display_name: "Results"

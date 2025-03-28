@@ -175,8 +175,8 @@ def read_signal(uid, kargs):
 
 def send_multiple_signals(uid, kargs):
     machine_config = app.get_machine_config(uid)
-    if machine_config is None:
-        raise Exception("Machine configuration is missing")
+    # if machine_config is None:
+    #     raise Exception("Machine configuration is missing")
     
     try:
         signals = kargs.get("signals")
